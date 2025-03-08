@@ -3,7 +3,11 @@
   "specifiers": {
     "jsr:@std/assert@1": "1.0.11",
     "jsr:@std/internal@^1.0.5": "1.0.5",
-    "npm:discordeno@21": "21.0.0"
+    "npm:@discordeno/bot@21": "21.0.0",
+    "npm:@discordeno/gateway@21": "21.0.0",
+    "npm:@discordeno/rest@21": "21.0.0",
+    "npm:@discordeno/types@21": "21.0.0",
+    "npm:@discordeno/utils@21": "21.0.0"
   },
   "jsr": {
     "@std/assert@1.0.11": {
@@ -51,16 +55,6 @@
         "@discordeno/types"
       ]
     },
-    "discordeno@21.0.0": {
-      "integrity": "sha512-NX1x5GtHbrNhpeahfHw+2A6/3bpec2obNjIZ/mkBUGWcpLWG/ZgJSIkkdQIxcrnQ3loQooo/5IpBucnFTiGATA==",
-      "dependencies": [
-        "@discordeno/bot",
-        "@discordeno/gateway",
-        "@discordeno/rest",
-        "@discordeno/types",
-        "@discordeno/utils"
-      ]
-    },
     "fzstd@0.1.1": {
       "integrity": "sha512-dkuVSOKKwh3eas5VkJy1AW1vFpet8TA/fGmVA5krThl8YcOVE/8ZIoEA1+U1vEn5ckxxhLirSdY837azmbaNHA=="
     },
@@ -71,7 +65,11 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@1",
-      "npm:discordeno@21"
+      "npm:@discordeno/bot@21",
+      "npm:@discordeno/gateway@21",
+      "npm:@discordeno/rest@21",
+      "npm:@discordeno/types@21",
+      "npm:@discordeno/utils@21"
     ]
   }
 }
