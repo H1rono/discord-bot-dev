@@ -28,7 +28,7 @@ async function serveBot(bot: Bot) {
     await bot.shutdown();
 }
 
-const bot = loadBot()!;
+const bot = loadBot() ?? Deno.exit(1);
 console.debug("Bot loaded");
 await serveBot(bot);
 Deno.exit(0);
