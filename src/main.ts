@@ -1,4 +1,4 @@
-import { Bot, createBot } from "@discordeno/bot";
+import { Bot, createBot, Intents } from "@discordeno/bot";
 
 function watchSignal(): Promise<void> {
     return new Promise((resolve) => {
@@ -16,7 +16,7 @@ function loadBot(): Bot | undefined {
     }
     const bot = createBot({
         token,
-        intents: ["Guilds", "GuildMessages"],
+        intents: [Intents.Guilds, Intents.GuildMessages, Intents.GuildPresences],
     });
     return bot;
 }
