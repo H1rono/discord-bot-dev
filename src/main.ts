@@ -1,10 +1,8 @@
 import { Bot, createBot } from "@discordeno/bot";
 
 function watchSignal(): Promise<void> {
-    console.log("Watching for SIGINT");
     return new Promise((resolve) => {
         Deno.addSignalListener("SIGINT", () => {
-            console.log("Received SIGINT");
             resolve();
         });
     });
@@ -25,13 +23,9 @@ function loadBot(): Bot | undefined {
 
 async function serveBot(bot: Bot) {
     const ctrl_c = watchSignal();
-    const start = bot.start().then(() => {
-        console.log("Bot start end");
-    });
+    const start = bot.start();
     await Promise.race([ctrl_c, start]);
-    console.log("Shutting down bot");
     await bot.shutdown();
-    console.log("Bot shutdown");
 }
 
 const bot = loadBot()!;
