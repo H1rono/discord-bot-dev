@@ -16,7 +16,12 @@ function loadBot(): Bot | undefined {
     }
     const bot = createBot({
         token,
-        intents: [Intents.Guilds, Intents.GuildMessages, Intents.GuildPresences],
+        intents: Intents.Guilds,
+        events: {
+            ready() {
+                console.log("Bot is ready");
+            },
+        },
     });
     return bot;
 }
