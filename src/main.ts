@@ -8,7 +8,7 @@ function watchSignal(): Promise<void> {
     });
 }
 
-function loadBot(): Bot | undefined {
+async function loadBot(): Promise<Bot | undefined> {
     const token = Deno.env.get("DISCORD_TOKEN");
     if (!token) {
         console.error("No token provided");
@@ -23,17 +23,17 @@ function loadBot(): Bot | undefined {
             },
         },
     });
+    await bot.start();
     return bot;
 }
 
 async function serveBot(bot: Bot) {
-    const ctrl_c = watchSignal();
-    const start = bot.start();
-    await Promise.race([ctrl_c, start]);
+    await watchSignal();
+    console.debug("Shutting down bot");
     await bot.shutdown();
 }
 
-const bot = loadBot() ?? Deno.exit(1);
+const bot = await loadBot() ?? Deno.exit(1);
 console.debug("Bot loaded");
 await serveBot(bot);
 Deno.exit(0);
