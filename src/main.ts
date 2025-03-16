@@ -19,6 +19,9 @@ async function serve(token: string) {
     const bot = createBot({
         token,
         intents: Intents.Guilds | Intents.GuildMessages | Intents.MessageContent,
+        desiredProperties: {
+            message: true,
+        },
         events: {
             ready() {
                 console.log("Bot is ready");
