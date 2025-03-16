@@ -8,12 +8,14 @@ function watchSignal(): Promise<void> {
     });
 }
 
-async function serve() {
-    const token = Deno.env.get("DISCORD_TOKEN");
-    if (!token) {
+function getToken(): string | undefined {
+    return Deno.env.get("DISCORD_TOKEN") ?? (() => {
         console.error("No token provided");
-        return;
-    }
+        return undefined;
+    })();
+}
+
+async function serve(token: string) {
     const bot = createBot({
         token,
         intents: Intents.Guilds,
@@ -30,5 +32,6 @@ async function serve() {
     await bot.shutdown();
 }
 
-await serve();
+const token = getToken() ?? Deno.exit(1);
+await serve(token);
 Deno.exit(0);
