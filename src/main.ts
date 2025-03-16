@@ -1,4 +1,4 @@
-import { Bot, createBot, Intents } from "@discordeno/bot";
+import { createBot, Intents } from "@discordeno/bot";
 
 function watchSignal(): Promise<void> {
     return new Promise((resolve) => {
@@ -8,7 +8,7 @@ function watchSignal(): Promise<void> {
     });
 }
 
-async function loadBot(): Promise<Bot | undefined> {
+async function serve() {
     const token = Deno.env.get("DISCORD_TOKEN");
     if (!token) {
         console.error("No token provided");
@@ -24,16 +24,11 @@ async function loadBot(): Promise<Bot | undefined> {
         },
     });
     await bot.start();
-    return bot;
-}
-
-async function serveBot(bot: Bot) {
+    console.debug("Bot started");
     await watchSignal();
     console.debug("Shutting down bot");
     await bot.shutdown();
 }
 
-const bot = await loadBot() ?? Deno.exit(1);
-console.debug("Bot loaded");
-await serveBot(bot);
+await serve();
 Deno.exit(0);
