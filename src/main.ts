@@ -18,7 +18,7 @@ function getToken(): string | undefined {
 async function serve(token: string) {
     const bot = createBot({
         token,
-        intents: Intents.Guilds,
+        intents: Intents.Guilds | Intents.GuildMessages | Intents.MessageContent,
         events: {
             ready() {
                 console.log("Bot is ready");
